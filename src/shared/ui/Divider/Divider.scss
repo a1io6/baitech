@@ -1,0 +1,37 @@
+@import '../../../app/style/variables.scss';
+
+.divider {
+    border: none;
+    border-top: 1px solid $border-light;
+    margin: 1rem 0;
+    width: 100%;
+
+    &--with-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    &__line {
+        flex: 1;
+        border: none;
+        border-top: 1px solid $border-light;
+        margin: 0;
+    }
+
+    &__text {
+        color: $text-muted;
+        font-size: 0.875rem;
+        white-space: nowrap;
+    }
+
+    &--vertical {
+        width: 1px;
+        height: 100%;
+        min-height: 1rem;
+        border: none;
+        border-left: 1px solid $border-light;
+        margin: 0 1rem;
+    }
+}
