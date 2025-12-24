@@ -1,0 +1,122 @@
+@import '../../../app/style/variables.scss';
+
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  font-family: 'Montserrat', sans-serif;
+
+  @media (max-width: $mobile) {
+    padding: 0.5rem;
+  }
+
+  &__container {
+    width: 100%;
+    max-width: 420px;
+    background-color: $background-white;
+    border-radius: $border-radius;
+    // box-shadow: $shadow;
+    padding: 2.5rem;
+
+    @media (max-width: $mobile) {
+      padding: 1.5rem;
+    }
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    margin: 0 0 0.5rem 0;
+    color: $text-color;
+    font-size: 1.75rem;
+    font-weight: 600;
+    opacity: 0.8;
+    cursor: pointer;
+
+    &.active {
+      color: $text-color;
+      opacity: 1;
+      border-bottom: 3px solid #0E2E5B;
+    }
+  }
+
+  &__terms-container {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: $text-muted;
+    // text-align: center;
+    display: flex;
+    width: 389px;
+  }
+
+  &__terms {
+    margin: 0 0.5rem;
+    text-wrap: unset;
+  }
+
+  &__terms-checkbox {
+    margin-right: 0.5rem;
+    width: 30px;
+    height: 30px;
+  }
+
+  &__registration-link {
+    display: inline-block;
+    color: $primary-color;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color $transition;
+
+    &:hover {
+      color: $primary-hover;
+      text-decoration: underline;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__error {
+    padding: 0.75rem;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: $border-radius-sm;
+    color: #721c24;
+    font-size: 0.9rem;
+  }
+
+  &__footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid $border-light;
+  }
+
+  &__forgot-password {
+    color: $text-muted;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color $transition;
+
+    &:hover {
+      color: $text-color;
+      text-decoration: underline;
+    }
+  }
+
+  &__activation {
+    margin-top: 2rem;
+  }
+}
