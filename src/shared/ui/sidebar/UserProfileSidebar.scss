@@ -1,0 +1,130 @@
+// UserProfileSidebar.scss
+.user-profile-sidebar {
+    width: 280px;
+    background: #ffffff;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 0;
+    border: 2px solid #0E2E5B;
+    box-shadow: 0 4px 12px rgba(14, 46, 91, 0.1);
+    position: relative;
+
+    .profile-menu {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 0 12px;
+        position: relative;
+
+        // Общий индикатор активного элемента
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 6px;
+            height: 38px;
+            background-color: #0E2E5B;
+            border-radius: 0 8px 8px 0;
+            transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            background: none;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            text-align: left;
+            position: relative;
+
+            &:hover {
+                background-color: rgba(14, 46, 91, 0.05);
+                color: #0E2E5B;
+
+                .menu-item-icon {
+                    filter: brightness(0) saturate(100%) invert(16%) sepia(49%) saturate(1768%) hue-rotate(199deg) brightness(91%) contrast(95%);
+                }
+            }
+
+            &.active {
+                background-color: rgba(14, 46, 91, 0.08);
+                color: #0E2E5B;
+                font-weight: 600;
+
+                .menu-item-icon {
+                    filter: brightness(0) saturate(100%) invert(16%) sepia(49%) saturate(1768%) hue-rotate(199deg) brightness(91%) contrast(95%);
+                }
+            }
+
+            .menu-item-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 12px;
+                width: 20px;
+                height: 20px;
+                transition: all 0.2s ease;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    filter: brightness(0) saturate(100%) invert(39%) sepia(6%) saturate(1141%) hue-rotate(174deg) brightness(94%) contrast(86%);
+                }
+            }
+
+            .menu-item-label {
+                font-size: 15px;
+                font-weight: 500;
+                flex: 1;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+}
+
+// Адаптивность
+@media (max-width: 768px) {
+    .user-profile-sidebar {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .user-profile-sidebar {
+        border-width: 1px;
+        padding: 16px 0;
+
+        .profile-menu {
+            .menu-item {
+                padding: 12px 14px;
+
+                .menu-item-label {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+}
+
+.user-profile-sidebar {
+  .profile-menu {
+    &::before {
+      // Используем CSS переменные для позиционирования
+      top: var(--indicator-top, 0);
+      height: var(--indicator-height, 38px);
+      // остальные свойства остаются теми же
+    }
+  }
+}
