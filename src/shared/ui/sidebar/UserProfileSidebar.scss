@@ -1,6 +1,6 @@
 // UserProfileSidebar.scss
 .user-profile-sidebar {
-    width: 280px;
+    width: 240px;
     background: #ffffff;
     border-radius: 12px;
     display: flex;
@@ -93,18 +93,13 @@
     }
 }
 
-// Адаптивность
-@media (max-width: 768px) {
-    .user-profile-sidebar {
-        width: 100%;
-        max-width: 100%;
-    }
-}
+
 
 @media (max-width: 480px) {
     .user-profile-sidebar {
         border-width: 1px;
         padding: 16px 0;
+        max-width: 200px;
 
         .profile-menu {
             .menu-item {
