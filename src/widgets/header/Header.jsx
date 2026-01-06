@@ -6,7 +6,9 @@ import { IoLanguageOutline } from 'react-icons/io5'
 
 export default function Header() {
   return (
+    
     <header className="header">
+      <div className='header_all'>
       <div className="header__container">
 
         <div className="header__logo">
@@ -28,6 +30,7 @@ export default function Header() {
           <FiUser />
         </div>
 
+      </div>
       </div>
     </header>
   )
