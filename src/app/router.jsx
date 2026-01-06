@@ -3,6 +3,7 @@ import LoginPage from "../pages/auth/login/LoginPage";
 import ForgotPassword from "../pages/auth/forgotPassword/ForgotPassword";
 import CodeVerify from "../pages/auth/code/CodeVerify";
 import Succses from "../pages/auth/succes/Succses";
+import ProductDetail from "../pages/landing/product-detail/ProductDetail";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "/success-verify",
     element: <Succses/>,
+  },
+  {
+    path:"/product-detail/:id",
+    element: <ProductDetail/>
   }
 ]);
 

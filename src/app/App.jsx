@@ -4,14 +4,16 @@ import router from "./router";
 import Banner from "../shared/ui/banner/Banner";
 import UserProfileSidebar from "../shared/ui/sidebar/UserProfileSidebar";
 import NavBar from "../shared/ui/NavBar/NavBar";
+import Breadcrumb from "../shared/ui/Breadcrumb/Breadcrumb";
 
 function App() {
   return (
     <div>
-      {/* <RouterProvider router={router} /> */}
+      <RouterProvider router={router} />
       {/* <Banner/> */}
-      <UserProfileSidebar/>
+      {/* <UserProfileSidebar/> */}
       {/* <NavBar /> */}
+      
     </div>
   );
 }
