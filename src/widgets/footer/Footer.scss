@@ -42,7 +42,7 @@ footer{
 }
 .footer__item svg {
   font-size: 18px;
-  color: #22c55e;
+  color: #A1B1CF;
   margin-top: 3px;
 }
 
@@ -91,10 +91,13 @@ footer{
 }
 
 /* === COLUMNS === */
+
 .footer__col h4 {
+  margin-top: 100px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 22px;
+  color: #fff;
 }
 
 .footer__col ul {
@@ -116,6 +119,10 @@ footer{
   color: #22c55e;
 }
 
+.footer__col ul h2{
+  font-size: 20px;
+  font-weight:500;
+}
 /* === SUBSCRIBE === */
 .footer__subscribe-text {
   font-size: 14px;
@@ -150,6 +157,7 @@ footer{
   width: 100%;
   max-width: 299px;
   height: 250px;
+  margin-top: 100px;
 }
 
 .footer__map-title {
@@ -181,22 +189,123 @@ footer{
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 1024px) {
-  .footer__container {
-    grid-template-columns: 1fr 1fr;
-    padding: 40px 50px;
+/* ── previous styles remain unchanged until responsive part ── */
+
+.footer {
+  width: 100%;
+  background: #00162A;
+}
+
+/* === ACCORDION === */
+.footer__accordion-header {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__accordion-icon {
+  width: 20px;
+  height: 20px;
+  color: #cbd5e1;
+  transition: transform 0.35s ease;
+}
+
+.footer__accordion-icon--open {
+  transform: rotate(180deg);
+}
+
+.footer__accordion-content {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s ease, margin-top 0.35s ease;
+  margin-top: 0;
+}
+
+.footer__accordion-content--open {
+  max-height: 800px; // large enough value (you can increase if needed)
+  margin-top: 16px;
+}
+
+/* Desktop — show titles normally, hide accordion styles */
+@media (min-width: 601px) {
+  .footer__accordion-header {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .footer__accordion-icon {
+    display: none;
+  }
+
+  .footer__accordion-content {
+    max-height: none !important;
+    overflow: visible;
+    margin-top: 22px; // original spacing
+  }
+
+  // Restore original margin-top for desktop h4
+  .footer__col h4 {
+    margin-top: 100px;
   }
 }
 
-@media (max-width: 768px) {
+/* Mobile — accordion mode */
+@media (max-width: 600px) {
   .footer__container {
-    grid-template-columns: 1fr;
-    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 32px 20px 40px;
+  }
+
+  .footer__col {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 20px 0;
+
+    &:first-child {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  // Contacts block has different spacing
+  .footer__col--contacts {
+    padding-top: 0;
+    border-top: none;
+  }
+
+  // Map adapts
+  .footer__col--map {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .footer__logo {
+    margin-bottom: 24px;
   }
 
   .footer__map {
+    margin-top: 16px;
     max-width: 100%;
-    height: 200px;
+    height: 220px;
+  }
+
+  .footer__col h4 {
+    margin-top: 0 !important;
+    font-size: 17px;
+  }
+
+  .footer__col ul {
+    padding-left: 4px;
+  }
+
+  .footer__bottom {
+    padding: 20px 20px;
   }
 }

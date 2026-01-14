@@ -1,21 +1,22 @@
-import React from 'react'
-import Header from '../widgets/header/Header'
-import Footer from '../widgets/footer/footer'
-import CartEmpty from '../widgets/cart/CartEmpty/CartEmpty'
-import CartItem from '../widgets/cart/CartItem/CartItem'
-import CartPage from '../widgets/cart/CartItem/CartPage'
-import Cart from '../widgets/cart/CartItem/cart'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import AdminPanel from '../widgets/camera/AdminPanel';
+import AddProduct from '../widgets/camera/AddProduct';
+import EditProduct from '../widgets/camera/EditProduct';
+// import AdminPanel from './components/AdminPanel';
+// import AddProduct from './components/AddProduct';
+// import EditProduct from './components/EditProduct';
 
 function App() {
   return (
-    <div>
-      <Header/>
-      {/* <CartEmpty/> */}
-      {/* <CartPage/> */}
-      <Cart/>
-      <Footer/>
-    </div>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<AdminPanel />} />
+        <Route path="/add-product" element={<AddProduct />} />
+        <Route path="/edit-product/:id" element={<EditProduct />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

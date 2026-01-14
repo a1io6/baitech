@@ -1,0 +1,266 @@
+.edit-product-page {
+  width: 1101px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f6fa;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+
+  .page-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+
+    .back-btn {
+      background: none;
+      border: 1px solid #dfe4ea;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: 20px;
+      color: #2c3e50;
+
+      &:hover {
+        background: #fff;
+      }
+    }
+
+    h2 {
+      font-size: 20px;
+      color: #00162ACC;
+      margin: 0;
+      font-weight: 500;
+    }
+  }
+
+  .form-container {
+    background: #F5F7FA;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    width: 822px;
+    margin: 0 auto;
+
+    .image-upload-section {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+
+      .thumbnail-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .thumbnail-slot {
+          width: 90px;
+          height: 90px;
+        //   border: 2px dashed #dfe4ea;
+          border-radius: 6px;
+          overflow: hidden;
+          cursor: pointer;
+          box-shadow: 0 2px 8px #0000004D;
+          background: linear-gradient(180.68deg, #E7E7E7 0.63%, #B2ADAD 50.04%, #DAD6D6 99.46%);
+
+
+          label {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+
+            .upload-placeholder {
+              font-size: 24px;
+              color: #7f8c8d;
+            }
+          }
+        }
+      }
+
+      .main-image-slot {
+        flex: 1;
+        height: 411px;
+        // border: 2px dashed #dfe4ea;
+        border-radius: 6px;
+        overflow: hidden;
+        cursor: pointer;
+        box-shadow: 0 2px 8px #0000004D;
+        background: linear-gradient(180.68deg, #E7E7E7 0.63%, #B2ADAD 50.04%, #DAD6D6 99.46%);
+
+
+        label {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+
+          .upload-placeholder-main {
+            font-size: 16px;
+            color: #7f8c8d;
+          }
+        }
+      }
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #000;
+      }
+
+      input, select, textarea {
+        width: 651px;
+        padding: 12px;
+        border: 1px solid #B0B0B0;
+        border-radius: 6px;
+        font-size: 14px;
+        font-family: inherit;
+        box-sizing: border-box;
+            background-color: #F5F7FA;
+
+
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      .new-item-input {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+
+        input {
+          flex: 1;
+        }
+
+        button {
+          background: #1c2a3d;
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 500;
+          border-radius: 6px;
+
+          &:hover {
+            background: #162134;
+          }
+        }
+      }
+    }
+    .form-group1 {
+      margin-bottom: 20px;
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #000;
+      }
+
+      input, select, textarea {
+        width: 651px;
+        padding: 12px;
+        border: 1px solid #B0B0B0;
+        border-radius: 6px;
+        font-size: 14px;
+        font-family: inherit;
+        box-sizing: border-box;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+
+      .new-item-input {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+
+        input {
+          flex: 1;
+        }
+
+        button {
+          background: #1c2a3d;
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          cursor: pointer;
+          font-size: 14px;
+          font-weight: 500;
+          border-radius: 6px;
+
+          &:hover {
+            background: #162134;
+          }
+        }
+      }
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 15px;
+      justify-content: flex-end;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #dfe4ea;
+
+      .cancel-btn {
+        background: #dfe4ea;
+        color: #2c3e50;
+        padding: 12px 32px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 6px;
+
+        &:hover {
+          background: #bdc3c7;
+        }
+      }
+
+      .submit-btn {
+        background: #1c2a3d;
+        color: #fff;
+        padding: 12px 32px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 6px;
+
+        &:hover {
+          background: #162134;
+        }
+      }
+    }
+  }
+}
