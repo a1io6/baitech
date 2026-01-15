@@ -4,8 +4,37 @@ import ForgotPassword from "../pages/auth/forgotPassword/ForgotPassword";
 import CodeVerify from "../pages/auth/code/CodeVerify";
 import Succses from "../pages/auth/succes/Succses";
 import ProductDetail from "../pages/landing/product-detail/ProductDetail";
+import Layout from "../widgets/layout/layout";
+import CameraCatalog from "../pages/admin/camera-catalog/CameraCatalog";
+import OrderTable from "../pages/admin/order-table/OrderTable";
 
 const router = createBrowserRouter([
+  {
+    path:"/admin",
+    element: <Layout/>,
+    children: [
+      {
+        path:"camera-catalog",
+        element:<CameraCatalog/>
+      },
+      {
+        path:"/admin/orders",
+        element: <OrderTable/>
+      },
+      {
+        path:"/admin/banners",
+        element: <h1>banners</h1>
+      },
+      {
+        path:"/admin/users",
+        element: <h1>users</h1>
+      },
+      {
+        path:"/admin/settings",
+        element: <h1>settings</h1>
+      },
+    ]
+  },
   {
     path: "/login",
     element: <LoginPage />,
