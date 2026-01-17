@@ -1,0 +1,79 @@
+$primary-dark: #1e293b; // Тёмно-синий цвет кнопки
+$input-bg: #f8fafc;    // Светлый фон инпута
+$label-color: #475569; // Цвет текста меток
+$border-color: #e2e8f0;
+
+.form-container {
+  width: 1101px; // Жалпы контейнердин туурасы
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+
+  .form-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: $primary-dark;
+    margin-bottom: 30px;
+  }
+
+  .product-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      label {
+        font-size: 14px;
+        color: $label-color;
+        font-weight: 500;
+      }
+
+      input {
+        width: 848px;  // Сиз сураган туурасы
+        height: 48px; // Сиз сураган бийиктиги
+        padding: 0 16px;
+        background-color: $input-bg;
+        border: 1px solid $border-color;
+        border-radius: 8px;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+
+        &::placeholder {
+          color: #94a3b8;
+        }
+
+        &:focus {
+          border-color: $primary-dark;
+          background-color: #fff;
+        }
+      }
+    }
+
+    .submit-btn {
+      width: 250px;
+      height: 48px;
+      margin-top: 10px;
+      background-color: $primary-dark;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
