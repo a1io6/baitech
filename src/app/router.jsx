@@ -7,6 +7,8 @@ import ProductDetail from "../pages/landing/product-detail/ProductDetail";
 import Layout from "../widgets/layout/layout";
 import CameraCatalog from "../pages/admin/camera-catalog/CameraCatalog";
 import OrderTable from "../pages/admin/order-table/OrderTable";
+import AdminBannerPage from "../pages/admin/banners/Banners";
+import UsersTable from "../pages/admin/UsersTable/UsersTable";
 
 const router = createBrowserRouter([
   {
@@ -23,11 +25,11 @@ const router = createBrowserRouter([
       },
       {
         path:"/admin/banners",
-        element: <h1>banners</h1>
+        element:<AdminBannerPage/>
       },
       {
         path:"/admin/users",
-        element: <h1>users</h1>
+        element: <UsersTable/>
       },
       {
         path:"/admin/settings",
