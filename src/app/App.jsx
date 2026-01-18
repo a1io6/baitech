@@ -16,7 +16,8 @@ function App() {
    <UserTable/>,
    <SettingWeb/>,
    <UpdateSetting/>,
-   <CourseDetails/>
+   <CourseDetails/>,
+   <AddProduct/>
   );
 }
 
