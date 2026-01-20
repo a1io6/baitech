@@ -1,23 +1,20 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import AdminPanel from '../widgets/camera/AdminPanel';
-import AddProduct from '../widgets/camera/AddProduct';
-import EditProduct from '../widgets/camera/EditProduct';
-import UserTable from '../widgets/user/UserTable';
-import SettingWeb from '../widgets/settingWeb/SettingWeb';
-import UpdateSetting from '../widgets/settingWeb/UpdateSetting';
-import CourseDetails from '../widgets/course/CourseDetails';
-// import AdminPanel from './components/AdminPanel';
-// import AddProduct from './components/AddProduct';
-// import EditProduct from './components/EditProduct';
+import React from "react";
+import { RouterProvider } from "react-router";
+import router from "./router";
+// import Banner from "../shared/ui/banner/Banner";
+// import UserProfileSidebar from "../shared/ui/sidebar/UserProfileSidebar";
+// import NavBar from "../shared/ui/NavBar/NavBar";
+// import Breadcrumb from "../shared/ui/Breadcrumb/Breadcrumb";
 
 function App() {
   return (
-   <UserTable/>,
-   <SettingWeb/>,
-   <UpdateSetting/>,
-   <CourseDetails/>,
-   <AddProduct/>
+    <div>
+      <RouterProvider router={router} />
+      {/* <Banner/> */}
+      {/* <UserProfileSidebar/> */}
+      {/* <NavBar /> */}
+      
+    </div>
   );
 }
 

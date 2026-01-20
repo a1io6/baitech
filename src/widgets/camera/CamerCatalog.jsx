@@ -1,11 +1,11 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './AdminPanel.scss';
+import './CamerCatalog.scss';
 import { IoSearch } from "react-icons/io5";
 
 
-const AdminPanel = () => {
+const CamerCatalog = () => {
   const [products, setProducts] = useState([
     {
       id: 1,
@@ -36,7 +36,7 @@ const AdminPanel = () => {
   ]);
 
   const [categories] = useState(['Камеры', 'Мониторы', 'Аксессуары', 'Кабели']);
-  const [brands] = useState(['Ductle', 'Dahua', 'Hikvision', 'Samsung']);
+  // const [brands] = useState(['Ductle', 'Dahua', 'Hikvision', 'Samsung']);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -101,13 +101,10 @@ const AdminPanel = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const handleEditProduct = (product) => {
-    navigate(`/edit-product/${product.id}`);
-    closeActionModal();
-  };
+
 
   return (
-    <div className="admin-panel">
+    <div className="admin-content">
       <div className="header">
         <div className='search-header'>
         <div className="search-container">
@@ -134,7 +131,7 @@ const AdminPanel = () => {
         </div>
         </div>
 
-        <button className="add-product-btn" onClick={() => navigate('/add-product')}>
+        <button className="add-product-btn"  onClick={() => navigate("/admin/add-banner")}>
           Добавить товар +
         </button>
       </div>
@@ -209,7 +206,7 @@ const AdminPanel = () => {
               </button>
               <button 
                 className="action-btn" 
-                onClick={() => handleEditProduct(selectedProduct)}
+ onClick={() => navigate("/admin/editproduct")}  
               >
                 Редактировать
               </button>
@@ -282,4 +279,4 @@ const AdminPanel = () => {
   );
 };
 
-export default AdminPanel;
+export default CamerCatalog;

@@ -27,7 +27,7 @@ const UserTable = () => {
   };
 
   return (
-    <div className="container">
+    <div className="admin-users"> {/* Изменено с container на admin-users */}
       <h2 className="title">Пользователи</h2>
       <div className="table-wrapper">
         <table className="user-table">

@@ -1,11 +1,17 @@
-
-.admin-panel {
-  max-width: 1101px;
+// ======================
+// СТИЛИ ДЛЯ ОСНОВНОЙ СТРАНИЦЫ CAMER CATALOG
+// ======================
+.admin-content {
+  width: 1101px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f5f6fa;
   min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+  
+  // Добавьте этот отступ, если есть боковая панель
+  margin-left: 280px;
+  width: calc(100% - 280px);
 
   .header {
     display: flex;
@@ -15,14 +21,21 @@
     margin-bottom: 30px;
     flex-wrap: wrap;
 
+    .search-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+      flex: 1;
+    }
+
     .search-container {
       position: relative;
       flex: 1;
       min-width: 250px;
-      max-width: 400px;
 
       input {
-        width: 426px;
+        width: 100%;
         height: 44px;
         padding: 12px 40px 12px 16px;
         border: 1px solid #dfe4ea;
@@ -30,6 +43,11 @@
         font-size: 14px;
         background: #fff;
         box-sizing: border-box;
+        
+        &:focus {
+          outline: none;
+          border-color: #1c2a3d;
+        }
       }
 
       .search-icon {
@@ -41,6 +59,7 @@
         border: none;
         cursor: pointer;
         font-size: 18px;
+        color: #7f8c8d;
       }
     }
 
@@ -49,9 +68,14 @@
       border: 1px solid #F5F7FA;
       border-radius: 6px;
       font-size: 14px;
-      background:#F5F7FA ;
+      background: #F5F7FA;
       cursor: pointer;
       min-width: 180px;
+      
+      &:focus {
+        outline: none;
+        border-color: #1c2a3d;
+      }
     }
 
     .add-product-btn {
@@ -64,6 +88,7 @@
       font-weight: 500;
       border-radius: 6px;
       transition: all 0.3s ease;
+      white-space: nowrap;
 
       &:hover {
         background: #162134;
@@ -89,7 +114,6 @@
 
     .product-card {
       width: 1101px;
-      height: 157px;
       background: #fff;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -97,22 +121,17 @@
       padding: 20px;
       box-sizing: border-box;
       display: flex;
-      justify-content: center;
-    //   align-items: center;
       gap: 40px;
+      transition: box-shadow 0.3s ease;
       
-      .card-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 20px;
-        width: 250px;
-        margin: 0 auto 20px;
+      &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
 
       .product-image {
         width: 205px;
         height: 120px;
+        min-width: 205px;
         border-radius: 6px;
         overflow: hidden;
         background: #f5f6fa;
@@ -130,6 +149,58 @@
           width: 100%;
           height: 100%;
           background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+        }
+      }
+
+      .card-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        
+        .info-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 20px;
+          align-items: start;
+          
+          .info-block {
+            .info-label {
+              font-size: 12px;
+              color: #7f8c8d;
+              margin-bottom: 6px;
+              font-weight: 500;
+            }
+            
+            .info-value {
+              font-size: 14px;
+              color: #2c3e50;
+              line-height: 1.4;
+              word-wrap: break-word;
+              overflow-wrap: break-word;
+              
+              &.name-value {
+                font-weight: 600;
+              }
+            }
+          }
+
+          .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+
+            &.in-stock {
+              background: rgba(39, 174, 96, 0.1);
+              color: #27ae60;
+            }
+
+            &.out-of-stock {
+              background: rgba(231, 76, 60, 0.1);
+              color: #e74c3c;
+            }
+          }
         }
       }
 
@@ -154,67 +225,16 @@
           }
         }
       }
-
-      .card-content {
-        width: 1060px;
-        margin: 0 auto;
-        
-        .info-grid {
-          display: grid;
-          grid-template-columns: repeat(4, 1fr);
-          gap: 20px;
-          align-items: start;
-          
-          .info-block {
-              .info-label {
-                  font-size: 12px;
-                  color: #7f8c8d;
-                  margin-bottom: 6px;
-                  font-weight: 500;
-                }
-                
-                
-                .info-value {
-              font-size: 14px;
-              color: #2c3e50;
-              line-height: 1.4;
-              word-wrap: break-word;
-              overflow-wrap: break-word;
-              
-              
-              &.name-value {
-                width: 205px;
-                max-width: 205px;
-              }
-            }
-          }
-
-          .status-badge {
-            display: inline-block;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-
-            &.in-stock {
-              background: rgba(39, 174, 96, 0.1);
-              color: #27ae60;
-            }
-
-            &.out-of-stock {
-              background: rgba(231, 76, 60, 0.1);
-              color: #e74c3c;
-            }
-          }
-        }
-      }
     }
   }
 
   /* Modal */
   .modal-overlay {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
     background: rgba(0,0,0,0.5);
     display: flex;
     align-items: center;
@@ -227,8 +247,7 @@
       max-width: 400px;
       border-radius: 12px;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      animation: modalFadeIn 0.3s ease;
 
       .modal-header {
         display: flex;
@@ -247,13 +266,16 @@
         .close-btn {
           background: none;
           border: none;
-          font-size: 32px;
+          font-size: 24px;
           cursor: pointer;
           color: #7f8c8d;
           line-height: 1;
+          padding: 5px;
+          border-radius: 4px;
 
           &:hover {
             color: #2c3e50;
+            background: #f5f6fa;
           }
         }
       }
@@ -261,7 +283,6 @@
       .modal-body {
         padding: 30px;
 
-        /* Стили для action-modal (три точки) */
         .action-btn {
           display: block;
           width: 100%;
@@ -278,6 +299,7 @@
 
           &:hover {
             background: #162134;
+            transform: translateY(-1px);
           }
 
           &.delete-btn {
@@ -289,7 +311,6 @@
           }
         }
 
-        /* Стили для status-modal */
         .status-options {
           display: flex;
           flex-direction: column;
@@ -320,7 +341,6 @@
           }
         }
 
-        /* Стили для delete-modal */
         p {
           margin: 0 0 25px;
           font-size: 16px;
@@ -369,9 +389,98 @@
   }
 }
 
-.search-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
+// Анимация для модального окна
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ======================
+// АДАПТИВНОСТЬ
+// ======================
+@media (max-width: 1200px) {
+  .admin-content {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    
+    .product-card {
+      .info-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-content {
+    margin-left: 0;
+    width: 100%;
+    padding: 15px;
+    
+    .header {
+      .search-header {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+        
+        .search-container {
+          min-width: 100%;
+          
+          input {
+            width: 100%;
+          }
+        }
+        
+        .category-dropdown {
+          width: 100%;
+        }
+      }
+      
+      .add-product-btn {
+        width: 100%;
+      }
+    }
+    
+    .product-card {
+      flex-direction: column;
+      gap: 20px;
+      
+      .product-image {
+        width: 100%;
+        height: 200px;
+      }
+      
+      .info-grid {
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-content {
+    padding: 10px;
+    
+    .modal-overlay {
+      .modal-content {
+        width: 95%;
+        margin: 10px;
+        
+        .modal-body {
+          padding: 20px;
+          
+          .delete-actions {
+            flex-direction: column;
+          }
+        }
+      }
+    }
+  }
 }

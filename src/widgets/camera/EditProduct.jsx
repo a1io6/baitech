@@ -3,273 +3,456 @@ import { useNavigate, useParams } from 'react-router-dom';
 import './EditProduct.scss';
 
 const EditProduct = () => {
-  const navigate = useNavigate();
   const { id } = useParams();
-  const [categories, setCategories] = useState(['Камеры', 'Мониторы', 'Аксессуары', 'Кабели']);
-  const [brands, setBrands] = useState(['Ductle', 'Dahua', 'Hikvision', 'Samsung']);
-  const [showNewCategory, setShowNewCategory] = useState(false);
-  const [showNewBrand, setShowNewBrand] = useState(false);
-  const [newCategoryName, setNewCategoryName] = useState('');
-  const [newBrandName, setNewBrandName] = useState('');
-
-  const [formData, setFormData] = useState({
+  const navigate = useNavigate();
+  
+  const [product, setProduct] = useState({
     name: '',
-    article: '',
     price: '',
+    article: '',
     category: '',
     brand: '',
     bonus: '',
     description: '',
     specifications: '',
-    images: [null, null, null, null]
+    images: [null, null, null, null],
+    mainImage: null
   });
 
-  // Здесь должен быть запрос к API или получение данных из контекста
+  // Изначальные категории и бренды
+  const [categories, setCategories] = useState(['Камеры', 'Мониторы', 'Аксессуары', 'Кабели']);
+  const [brands, setBrands] = useState(['Ductle', 'Dahua', 'Hikvision', 'Samsung']);
+  
+  // Состояние для новых значений
+  const [newCategory, setNewCategory] = useState('');
+  const [newBrand, setNewBrand] = useState('');
+  
+  const [saving, setSaving] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  // Загрузка данных товара
   useEffect(() => {
-    // Временные данные для демонстрации
-    const mockProduct = {
-      id: 1,
-      name: 'Электронасос/помпа Ductle E29 750 ватт, 27.5 колеса, батарея 13.5 ач. Двухподвес.',
-      price: '25000',
-      article: '123456',
-      category: 'Камеры',
-      brand: 'Ductle',
-      status: 'В наличии',
-      bonus: '',
-      description: 'Современная IP-камера для организации системы безопасности на объектах различного типа.',
-      specifications: 'Количество: 3 шт.\nВес: 580 г',
-      images: [null, null, null, null]
+    const fetchProduct = async () => {
+      try {
+        // В реальном приложении здесь будет запрос к API
+        setProduct({
+          id: 1,
+          name: 'Электронасос/помпа Ductle E29 750 ватт, 27.5 колеса, батарея 13.5 ач. Двухподвес.',
+          price: '25000',
+          article: '123456',
+          category: 'Камеры',
+          brand: 'Ductle',
+          bonus: '10%',
+          description: 'Современная IP-камера для организации системы безопасности на объектах различного типа.',
+          specifications: 'Количество: 3 шт.\nВес: 580 г',
+          images: [null, null, null, null],
+          mainImage: null,
+        });
+      } catch (error) {
+        console.error('Ошибка загрузки товара:', error);
+      }
     };
-    
-    setFormData({
-      name: mockProduct.name,
-      article: mockProduct.article,
-      price: mockProduct.price,
-      category: mockProduct.category,
-      brand: mockProduct.brand,
-      bonus: mockProduct.bonus || '',
-      description: mockProduct.description || '',
-      specifications: mockProduct.specifications || '',
-      images: [...mockProduct.images]
-    });
+
+    if (id) {
+      fetchProduct();
+    }
   }, [id]);
 
-  const handleImageUpload = (e, index) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      const newImages = [...formData.images];
-      newImages[index] = imageUrl;
-      setFormData({ ...formData, images: newImages });
-    }
-  };
-
+  // Обработчики изменения основных полей
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleCategoryChange = (e) => {
-    const value = e.target.value;
-    if (value === 'add_new') {
-      setShowNewCategory(true);
-      setFormData({ ...formData, category: '' });
-    } else {
-      setShowNewCategory(false);
-      setFormData({ ...formData, category: value });
+    setProduct(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    
+    // Очищаем ошибку для этого поля
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
 
-  const handleBrandChange = (e) => {
-    const value = e.target.value;
-    if (value === 'add_new') {
-      setShowNewBrand(true);
-      setFormData({ ...formData, brand: '' });
-    } else {
-      setShowNewBrand(false);
-      setFormData({ ...formData, brand: value });
+  // Добавление новой категории
+  const handleAddCategory = () => {
+    if (newCategory.trim() && !categories.includes(newCategory.trim())) {
+      setCategories(prev => [...prev, newCategory.trim()]);
+      setProduct(prev => ({ ...prev, category: newCategory.trim() }));
+      setNewCategory('');
     }
   };
 
-  const addNewCategory = () => {
-    if (newCategoryName.trim()) {
-      setCategories([...categories, newCategoryName.trim()]);
-      setFormData({ ...formData, category: newCategoryName.trim() });
-      setShowNewCategory(false);
-      setNewCategoryName('');
+  // Добавление нового бренда
+  const handleAddBrand = () => {
+    if (newBrand.trim() && !brands.includes(newBrand.trim())) {
+      setBrands(prev => [...prev, newBrand.trim()]);
+      setProduct(prev => ({ ...prev, brand: newBrand.trim() }));
+      setNewBrand('');
     }
   };
 
-  const addNewBrand = () => {
-    if (newBrandName.trim()) {
-      setBrands([...brands, newBrandName.trim()]);
-      setFormData({ ...formData, brand: newBrandName.trim() });
-      setShowNewBrand(false);
-      setNewBrandName('');
+  // Обработчик загрузки основного изображения
+  const handleMainImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProduct(prev => ({
+          ...prev,
+          mainImage: reader.result
+        }));
+      };
+      reader.readAsDataURL(file);
     }
   };
 
-  const handleSubmit = () => {
-    // Здесь будет логика обновления товара
-    console.log('Товар обновлен:', formData);
-    navigate('/');
+  // Обработчик загрузки миниатюр
+  const handleThumbnailUpload = (index, e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const newImages = [...product.images];
+        newImages[index] = reader.result;
+        setProduct(prev => ({
+          ...prev,
+          images: newImages
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  // Удаление изображения
+  const handleRemoveImage = (index) => {
+    const newImages = [...product.images];
+    newImages[index] = null;
+    setProduct(prev => ({
+      ...prev,
+      images: newImages
+    }));
+  };
+
+  // Удаление основного изображения
+  const handleRemoveMainImage = () => {
+    setProduct(prev => ({
+      ...prev,
+      mainImage: null
+    }));
+  };
+
+  // Валидация формы
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!product.name.trim()) {
+      newErrors.name = 'Название товара обязательно';
+    }
+    
+    if (!product.price.trim()) {
+      newErrors.price = 'Цена обязательна';
+    } else if (isNaN(Number(product.price)) || Number(product.price) <= 0) {
+      newErrors.price = 'Цена должна быть положительным числом';
+    }
+    
+    if (!product.article.trim()) {
+      newErrors.article = 'Артикул обязателен';
+    }
+    
+    if (!product.category) {
+      newErrors.category = 'Категория обязательна';
+    }
+    
+    if (!product.brand) {
+      newErrors.brand = 'Бренд обязателен';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Сохранение товара
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      return;
+    }
+    
+    setSaving(true);
+    try {
+      // В реальном приложении здесь будет запрос к API
+      setTimeout(() => {
+        console.log('Товар обновлен:', product);
+        setSaving(false);
+        alert('Товар успешно обновлен!');
+        navigate('/admin/camera-catalog');
+      }, 1500);
+    } catch (error) {
+      console.error('Ошибка сохранения:', error);
+      setSaving(false);
+      alert('Ошибка при сохранении товара');
+    }
+  };
+
+  // Отмена редактирования
+  const handleCancel = () => {
+    if (window.confirm('Вы уверены? Все несохраненные изменения будут потеряны.')) {
+      navigate('/admin/camera-catalog');
+    }
   };
 
   return (
     <div className="edit-product-page">
       <div className="page-header">
-        <button className="back-btn" onClick={() => navigate('/')}>← Назад</button>
+        <button className="back-btn" onClick={handleCancel}>
+          Назад
+        </button>
         <h2>Редактировать товар</h2>
       </div>
 
-      <div className="form-container">
+      <form className="form-container" onSubmit={handleSubmit}>
+        {/* Загрузка изображений */}
         <div className="image-upload-section">
           <div className="thumbnail-grid">
-            {[0, 1, 2].map((idx) => (
-              <div key={idx} className="thumbnail-slot">
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => handleImageUpload(e, idx)}
-                  id={`thumb-${idx}`}
-                  style={{ display: 'none' }}
-                />
-                <label htmlFor={`thumb-${idx}`}>
-                  {formData.images[idx] ? (
-                    <img src={formData.images[idx]} alt={`Thumbnail ${idx + 1}`} />
-                  ) : (
-                    <div className="upload-placeholder">📷</div>
-                  )}
-                </label>
+            {[0, 1, 2, 3].map((index) => (
+              <div key={index} className="thumbnail-slot">
+                {product.images[index] ? (
+                  <div className="uploaded-image">
+                    <img src={product.images[index]} alt={`Миниатюра ${index + 1}`} />
+                    <button
+                      type="button"
+                      className="remove-btn"
+                      onClick={() => handleRemoveImage(index)}
+                    >
+                      ×
+                    </button>
+                  </div>
+                ) : (
+                  <label htmlFor={`thumbnail-${index}`}>
+                    <div className="upload-placeholder">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 5V19M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                      </svg>
+                    </div>
+                    <input
+                      id={`thumbnail-${index}`}
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleThumbnailUpload(index, e)}
+                      style={{ display: 'none' }}
+                    />
+                  </label>
+                )}
               </div>
             ))}
           </div>
 
           <div className="main-image-slot">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => handleImageUpload(e, 3)}
-              id="main-image"
-              style={{ display: 'none' }}
-            />
-            <label htmlFor="main-image">
-              {formData.images[3] ? (
-                <img src={formData.images[3]} alt="Main preview" />
-              ) : (
-                <div className="upload-placeholder-main">Загрузить фото</div>
-              )}
-            </label>
+            {product.mainImage ? (
+              <div className="uploaded-image">
+                <img src={product.mainImage} alt="Основное изображение" />
+                <button
+                  type="button"
+                  className="remove-btn"
+                  onClick={handleRemoveMainImage}
+                >
+                  ×
+                </button>
+              </div>
+            ) : (
+              <label htmlFor="main-image">
+                <div className="upload-placeholder-main">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 5V19M5 12H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                  </svg>
+                  <p>Загрузить основное изображение</p>
+                  <p className="upload-hint">Рекомендуемый размер: 800x600px</p>
+                </div>
+                <input
+                  id="main-image"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleMainImageUpload}
+                  style={{ display: 'none' }}
+                />
+              </label>
+            )}
           </div>
         </div>
 
+        {/* Основная информация */}
         <div className="form-group">
-          <label>Название</label>
+          <label htmlFor="name">Название товара *</label>
           <input
-            type="text"
+            id="name"
             name="name"
-            value={formData.name}
+            type="text"
+            value={product.name}
             onChange={handleInputChange}
+            placeholder="Введите название товара"
+            className={errors.name ? 'error-input' : ''}
           />
+          {errors.name && <span className="error-message">{errors.name}</span>}
         </div>
 
         <div className="form-group">
-          <label>Артикул</label>
+          <label htmlFor="price">Цена (сом) *</label>
           <input
-            type="text"
-            name="article"
-            value={formData.article}
-            onChange={handleInputChange}
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Цена</label>
-          <input
-            type="text"
+            id="price"
             name="price"
-            value={formData.price}
+            type="text"
+            value={product.price}
             onChange={handleInputChange}
+            placeholder="Введите цену"
+            className={errors.price ? 'error-input' : ''}
           />
+          {errors.price && <span className="error-message">{errors.price}</span>}
         </div>
 
         <div className="form-group">
-          <label>Категории</label>
-          <select name="category" value={formData.category} onChange={handleCategoryChange}>
-            <option value="">--------------------</option>
+          <label htmlFor="article">Артикул *</label>
+          <input
+            id="article"
+            name="article"
+            type="text"
+            value={product.article}
+            onChange={handleInputChange}
+            placeholder="Введите артикул"
+            className={errors.article ? 'error-input' : ''}
+          />
+          {errors.article && <span className="error-message">{errors.article}</span>}
+        </div>
+
+        {/* Категория с возможностью добавления */}
+        <div className="form-group">
+          <label htmlFor="category">Категория *</label>
+          <select
+            id="category"
+            name="category"
+            value={product.category}
+            onChange={handleInputChange}
+            className={errors.category ? 'error-input' : ''}
+          >
+            <option value="">Выберите категорию</option>
             {categories.map((cat, idx) => (
               <option key={idx} value={cat}>{cat}</option>
             ))}
-            <option value="add_new">+ Добавить новую</option>
           </select>
-          {showNewCategory && (
-            <div className="new-item-input">
-              <input
-                type="text"
-                placeholder="Название категории"
-                value={newCategoryName}
-                onChange={(e) => setNewCategoryName(e.target.value)}
-              />
-              <button onClick={addNewCategory}>Добавить</button>
-            </div>
-          )}
+          {errors.category && <span className="error-message">{errors.category}</span>}
+          
+          {/* Поле для добавления новой категории */}
+          <div className="add-new-item">
+            <input
+              type="text"
+              value={newCategory}
+              onChange={(e) => setNewCategory(e.target.value)}
+              placeholder="Или введите новую категорию"
+            />
+            <button
+              type="button"
+              className="add-btn"
+              onClick={handleAddCategory}
+              disabled={!newCategory.trim()}
+            >
+              Добавить категорию
+            </button>
+          </div>
         </div>
 
+        {/* Бренд с возможностью добавления */}
         <div className="form-group">
-          <label>Бренд</label>
-          <select name="brand" value={formData.brand} onChange={handleBrandChange}>
-            <option value="">--------------------</option>
+          <label htmlFor="brand">Бренд *</label>
+          <select
+            id="brand"
+            name="brand"
+            value={product.brand}
+            onChange={handleInputChange}
+            className={errors.brand ? 'error-input' : ''}
+          >
+            <option value="">Выберите бренд</option>
             {brands.map((brand, idx) => (
               <option key={idx} value={brand}>{brand}</option>
             ))}
-            <option value="add_new">+ Добавить новый</option>
           </select>
-          {showNewBrand && (
-            <div className="new-item-input">
-              <input
-                type="text"
-                placeholder="Название бренда"
-                value={newBrandName}
-                onChange={(e) => setNewBrandName(e.target.value)}
-              />
-              <button onClick={addNewBrand}>Добавить</button>
-            </div>
-          )}
+          {errors.brand && <span className="error-message">{errors.brand}</span>}
+          
+          {/* Поле для добавления нового бренда */}
+          <div className="add-new-item">
+            <input
+              type="text"
+              value={newBrand}
+              onChange={(e) => setNewBrand(e.target.value)}
+              placeholder="Или введите новый бренд"
+            />
+            <button
+              type="button"
+              className="add-btn"
+              onClick={handleAddBrand}
+              disabled={!newBrand.trim()}
+            >
+              Добавить бренд
+            </button>
+          </div>
         </div>
 
+        {/* Бонус */}
         <div className="form-group">
-          <label>Бонус</label>
+          <label htmlFor="bonus">Бонус (%)</label>
           <input
-            type="text"
+            id="bonus"
             name="bonus"
-            value={formData.bonus}
+            type="text"
+            value={product.bonus}
             onChange={handleInputChange}
+            placeholder="Введите процент бонуса"
           />
         </div>
 
-        <div className="form-group1">
-          <label>Описание</label>
+        {/* Описание */}
+        <div className="form-group">
+          <label htmlFor="description">Описание товара</label>
           <textarea
+            id="description"
             name="description"
-            value={formData.description}
+            value={product.description}
             onChange={handleInputChange}
+            placeholder="Введите подробное описание товара"
+            rows="4"
           />
         </div>
 
-        <div className="form-group1">
-          <label>Характеристики</label>
+        {/* Характеристики */}
+        <div className="form-group">
+          <label htmlFor="specifications">Характеристики</label>
           <textarea
+            id="specifications"
             name="specifications"
-            value={formData.specifications}
+            value={product.specifications}
             onChange={handleInputChange}
+            placeholder="Введите характеристики товара (каждая характеристика с новой строки)"
+            rows="3"
           />
         </div>
 
+        {/* Кнопки действий */}
         <div className="form-actions">
-          <button className="cancel-btn" onClick={() => navigate('/')}>Отмена</button>
-          <button className="submit-btn" onClick={handleSubmit}>Сохранить</button>
+          <button
+            type="button"
+            className="cancel-btn"
+            onClick={handleCancel}
+            disabled={saving}
+          >
+            Отмена
+          </button>
+          <button
+            type="submit"
+            className="submit-btn"
+            disabled={saving}
+          >
+            {saving ? 'Сохранение...' : 'Сохранить изменения'}
+          </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
