@@ -15,6 +15,8 @@ import SettingWeb from "../widgets/settingWeb/SettingWeb";
 import UpdateSetting from "../widgets/settingWeb/UpdateSetting";
 import UserTable from "../widgets/user/UserTable";
 import CamerCatalog from "../widgets/camera/CamerCatalog";
+import CorporateBlock from "../widgets/solution/CorporateBlock";
+import SolutionDetail from "../widgets/solution/SolutionDetail";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +85,14 @@ const router = createBrowserRouter([
     path: "/product-detail/:id",
     element: <ProductDetail />
   },
+  {
+    path:"/CorporateBlock",
+    element:<CorporateBlock/>
+  },
+  {
+    path:"/SolutionDetail/:id",
+    element:<SolutionDetail/>
+  }
   
 ]);
 
