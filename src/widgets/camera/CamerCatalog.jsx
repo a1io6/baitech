@@ -206,7 +206,7 @@ const CamerCatalog = () => {
               </button>
               <button 
                 className="action-btn" 
- onClick={() => navigate("/CorporateBlock")}  
+ onClick={() => navigate("/ChangePassword")}  
               >
                 Редактировать
               </button>

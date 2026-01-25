@@ -17,6 +17,8 @@ import UserTable from "../widgets/user/UserTable";
 import CamerCatalog from "../widgets/camera/CamerCatalog";
 import CorporateBlock from "../widgets/solution/CorporateBlock";
 import SolutionDetail from "../widgets/solution/SolutionDetail";
+import ChangePassword from "../widgets/ChangePassword/ChangePassword";
+import AddressBook from "../widgets/AddressBook/AddressBook";
 
 const router = createBrowserRouter([
   {
@@ -92,6 +94,14 @@ const router = createBrowserRouter([
   {
     path:"/SolutionDetail/:id",
     element:<SolutionDetail/>
+  },
+  {
+    path:"/ChangePassword",
+    element:<ChangePassword/>
+  },
+  {
+    path:"/AddressBook",
+    element:<AddressBook/>
   }
   
 ]);
