@@ -19,6 +19,7 @@ import CorporateBlock from "../widgets/solution/CorporateBlock";
 import SolutionDetail from "../widgets/solution/SolutionDetail";
 import ChangePassword from "../widgets/ChangePassword/ChangePassword";
 import AddressBook from "../widgets/AddressBook/AddressBook";
+import AddAddressPage from "../widgets/AddressBook/AddAddressPage";
 
 const router = createBrowserRouter([
   {
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
   {
     path:"/AddressBook",
     element:<AddressBook/>
+  },
+  {
+    path:"/AddAddressPage",
+    element:<AddAddressPage/>
   }
   
 ]);
