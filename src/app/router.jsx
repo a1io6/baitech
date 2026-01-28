@@ -24,6 +24,7 @@ import AboutCompany from "../widgets/AboutCompany/AboutCompany";
 import BrandsPage from "../widgets/BrandsPage/BrandsPage";
 import Certificates from "../widgets/Certificates/Certificates";
 import TermsOfUse from "../widgets/TermsOfUse/TermsOfUse";
+import NotFound from "../widgets/NotFound/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -127,6 +128,10 @@ const router = createBrowserRouter([
   {
     path:"/TermsOfUse",
     element:<TermsOfUse/>
+  },
+  {
+    path:"/NotFound",
+    element:<NotFound/>
   }
   
 ]);

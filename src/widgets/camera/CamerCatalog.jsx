@@ -206,7 +206,7 @@ const CamerCatalog = () => {
               </button>
               <button 
                 className="action-btn" 
- onClick={() => navigate("/TermsOfUse")}  
+ onClick={() => navigate("/NotFound")}  
               >
                 Редактировать
               </button>
