@@ -20,6 +20,10 @@ import SolutionDetail from "../widgets/solution/SolutionDetail";
 import ChangePassword from "../widgets/ChangePassword/ChangePassword";
 import AddressBook from "../widgets/AddressBook/AddressBook";
 import AddAddressPage from "../widgets/AddressBook/AddAddressPage";
+import AboutCompany from "../widgets/AboutCompany/AboutCompany";
+import BrandsPage from "../widgets/BrandsPage/BrandsPage";
+import Certificates from "../widgets/Certificates/Certificates";
+import TermsOfUse from "../widgets/TermsOfUse/TermsOfUse";
 
 const router = createBrowserRouter([
   {
@@ -107,6 +111,22 @@ const router = createBrowserRouter([
   {
     path:"/AddAddressPage",
     element:<AddAddressPage/>
+  },
+  {
+    path:"/AboutCompany",
+    element:<AboutCompany/>
+  },
+  {
+    path:"/BrandsPage",
+    element:<BrandsPage/>
+  },
+  {
+    path:"/Certificates",
+    element:<Certificates/>
+  },
+  {
+    path:"/TermsOfUse",
+    element:<TermsOfUse/>
   }
   
 ]);
